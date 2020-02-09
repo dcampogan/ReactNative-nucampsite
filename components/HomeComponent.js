@@ -26,7 +26,7 @@ class Home extends Component {
     this.state = {
       campsites: CAMPSITES,
       promotions: PROMOTIONS,
-      partners: PROMOTIONS
+      partners: PARTNERS
     };
   }
 
