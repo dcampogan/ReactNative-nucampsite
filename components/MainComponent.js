@@ -9,11 +9,14 @@ import CampsiteInfo from "./CampsiteInfoComponent";
 
 const DirectoryNavigator = createStackNavigator(
   {
+    //ROUTES CONFIG OBJECT
+    //SETUP WHAT COMPONENTS AVAILABLE FOR STACK
+    //SCREEN GIVES DIRECTORY COMPONENT CONVENIENCE FUNCTIONS (SEE DOC)
     Directory: { screen: Directory },
     CampsiteInfo: { screen: CampsiteInfo }
   },
   {
-    initialRouteName: "Directory",
+    initialRouteName: "Directory", //THIS IS THE DEFAULT SCREEN
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#5637DD"
@@ -81,7 +84,7 @@ const MainNavigator = createDrawerNavigator(
   {
     Home: { screen: HomeNavigator },
     Directory: { screen: DirectoryNavigator },
-    About: { screen: AboutNavigator},
+    About: { screen: AboutNavigator },
     Contact: { screen: ContactNavigator }
   },
   {
@@ -95,7 +98,7 @@ class Main extends Component {
       <View
         style={{
           flex: 1,
-          paddingTop: Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight
+          paddingTop: Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight //TO ACCOUNT FOR DIFFERENCES BTWN ANDROID AND IOS
         }}>
         <MainNavigator />
       </View>

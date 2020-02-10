@@ -49,9 +49,9 @@ class About extends Component {
         <Mission />
         <Card title="Community Partners">
           <FlatList
-            data={this.state.partners}
-            renderItem={renderPartner}
-            keyExtractor={item => item.id.toString()}
+            data={this.state.partners} // BUILT IN PROP, ITERATES THROUGH ARRAY LIKE MAP
+            renderItem={renderPartner} // TELLS IT WHAT TO DO WITH THE LIST
+            keyExtractor={item => item.id.toString()} // DOES SAME THING AS KEY IN REACT
           />
         </Card>
       </ScrollView>
