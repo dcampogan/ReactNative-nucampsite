@@ -3,28 +3,30 @@ import { baseUrl } from "../shared/baseUrl";
 
 //fetchComments wrapped in addional function - sends async request using fetch which returns a promise that's handled by the promise chain below
 export const fetchComments = () => dispatch => {
-  return fetch(baseUrl + "comments")
-    .then(
-      response => {
-        if (response.ok) {
-          return response;
-        } else {
-          const error = new Error(
-            `Error ${response.status}: ${response.statusText}`
-          );
-          error.response = response;
-          throw error;
+  return (
+    fetch(baseUrl + "comments")
+      .then(
+        response => {
+          if (response.ok) {
+            return response;
+          } else {
+            const error = new Error(
+              `Error ${response.status}: ${response.statusText}`
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        error => {
+          const errMess = new Error(error.message);
+          throw errMess;
         }
-      },
-      error => {
-        const errMess = new Error(error.message);
-        throw errMess;
-      }
-    )
-    //promise chain
-    .then(response => response.json())
-    .then(comments => dispatch(addComments(comments)))
-    .catch(error => dispatch(commentsFailed(error.message)));
+      )
+      //promise chain
+      .then(response => response.json())
+      .then(comments => dispatch(addComments(comments)))
+      .catch(error => dispatch(commentsFailed(error.message)))
+  );
 };
 
 export const commentsFailed = errMess => ({
@@ -152,4 +154,15 @@ export const partnersFailed = errMess => ({
 export const addPartners = partners => ({
   type: ActionTypes.ADD_PARTNERS,
   payload: partners
+});
+
+export const postFavorite = campsiteId => dispatch => {
+  setTimeout(() => {
+    dispatch(addFavorite(campsiteId));
+  }, 2000);
+};
+
+export const addFavorite = campsiteId => ({
+  type: ActionTypes.ADD_FAVORITE,
+  payload: campsiteId
 });
