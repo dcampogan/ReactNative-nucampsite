@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "expo": "~36.0.0",
+    "expo-secure-store": "^7.0.0",
     "install": "^0.13.0",
     "npm": "^6.13.7",
     "react": "~16.9.0",
