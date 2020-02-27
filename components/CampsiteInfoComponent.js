@@ -7,6 +7,7 @@ import {
   Modal,
   Button,
   StyleSheet,
+  Share,
   Alert,
   PanResponder
 } from "react-native";
@@ -47,6 +48,7 @@ function RenderCampsite(props) {
           console.log(endState.finished ? "finished" : "canceled")
         );
     },
+
     onPanResponderEnd: (e, gestureState) => {
       console.log("pan responder end", gestureState);
       if (recognizeDrag(gestureState)) {
@@ -76,6 +78,19 @@ function RenderCampsite(props) {
       return true;
     }
   });
+
+  const shareCampsite = (title, message, url) => {
+    Share.share(
+      {
+        title: title,
+        message: `${title}: ${message} ${url}`,
+        url: url
+      },
+      {
+        dialogTitle: "Share " + title
+      }
+    );
+  };
 
   if (campsite) {
     return (
@@ -112,6 +127,21 @@ function RenderCampsite(props) {
               raised
               reverse
               onPress={() => props.onShowModal()}
+            />
+            <Icon
+              name={"share"}
+              type="font-awesome"
+              color="#5637DD"
+              style={styles.cardItem}
+              raised
+              reverse
+              onPress={() =>
+                shareCampsite(
+                  campsite.name,
+                  campsite.description,
+                  baseUrl + campsite.image
+                )
+              }
             />
           </View>
         </Card>
